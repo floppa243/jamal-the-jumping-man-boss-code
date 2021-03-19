@@ -1,0 +1,206 @@
+namespace SpriteKind {
+    export const boss = SpriteKind.create()
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile28`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(5, 46))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile21`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(5, 46))
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    sword = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . f 2 . . . . . . . . . . 
+        . . . f f . . . . . . . . . . . 
+        . f f 2 2 2 2 2 2 2 2 2 2 2 . . 
+        f f 2 f f 2 1 1 1 1 1 1 1 1 2 2 
+        . f f 2 2 2 2 2 2 2 2 2 2 2 . . 
+        . . . f f . . . . . . . . . . . 
+        . . . . f 2 . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, Jamal_Fight, 100, 0)
+    pause(1000)
+    sword.destroy()
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (Jamal_Fight.tileKindAt(TileDirection.Bottom, sprites.castle.tilePath2)) {
+        Jamal_Fight.vy += -200
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile3`, function (sprite, location) {
+    info.changeLifeBy(-1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile19`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(2, 24))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile26`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level2`)
+    scene.setBackgroundColor(6)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(5, 44))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile8`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(2, 24))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile5`, function (sprite, location) {
+    scene.setBackgroundColor(12)
+    tiles.setTilemap(tilemap`level3`)
+    info.changeLifeBy(1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile6`, function (sprite, location) {
+    tiles.placeOnTile(jamal, tiles.getTileLocation(1, 21))
+    info.changeLifeBy(-1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile15`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(2, 24))
+})
+info.onLifeZero(function () {
+	
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile24`, function (sprite, location) {
+    info.changeLifeBy(-100000)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile20`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level1`)
+    scene.setBackgroundColor(3)
+    music.magicWand.play()
+    tiles.placeOnTile(jamal, tiles.getTileLocation(8, 9))
+    game.showLongText("You found my secret level wow", DialogLayout.Bottom)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile9`, function (sprite, location) {
+    info.changeLifeBy(2)
+    scene.setBackgroundColor(4)
+    tiles.setTilemap(tilemap`level5`)
+    tiles.placeOnTile(jamal, tiles.getTileLocation(2, 24))
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+    tiles.setTilemap(tilemap`level6`)
+    Jamal_Fight = sprites.create(img`
+        ........................2......
+        ........................2......
+        .......................212.....
+        .......................212.....
+        .......................212.....
+        .............fffff.....212.....
+        ............f11111f....212.....
+        ...........f1111111f...212.....
+        ...........f11f1f11f...212.....
+        ...........f1111111f...212.....
+        ...........f1111111f.2.222.2...
+        ...........f11fff1ff.ff2f2ff...
+        ............f11e11f...f2f2f....
+        .............fffff.....fff.....
+        ...............f........f......
+        ......fffff...fff...fffff......
+        ...........fff.f.fff....f......
+        ...............f...............
+        ...............f...............
+        ...............f...............
+        ...............f...............
+        ..............fff..............
+        .............ff.ff.............
+        ............ff...ff............
+        ............f.....f............
+        ............f.....f............
+        ............f.....f............
+        ............f.....f............
+        ............f.....f............
+        ............f.....f............
+        ............f.....f............
+        `, SpriteKind.Player)
+    Jamal_Fight.ay = 500
+    tiles.placeOnTile(Jamal_Fight, tiles.getTileLocation(2, 15))
+    scene.cameraFollowSprite(Jamal_Fight)
+    controller.moveSprite(Jamal_Fight, 100, 0)
+})
+let Jamal_Fight: Sprite = null
+let sword: Sprite = null
+let jamal: Sprite = null
+jamal = sprites.create(img`
+    ...............................
+    ...............................
+    ...............................
+    ...............................
+    ...............................
+    .............fffff.............
+    ............f11111f............
+    ...........f1111111f...........
+    ...........f11f1f11f...........
+    ...........f1111111f...........
+    ...........f1111111f...........
+    ...........f11fff1ff...........
+    ............f11e11f............
+    .............fffff.............
+    ...............f...............
+    ........fff...fff...fff........
+    ...........fff.f.fff...........
+    ...............f...............
+    ...............f...............
+    ...............f...............
+    ...............f...............
+    ..............fff..............
+    .............ff.ff.............
+    ............ff...ff............
+    ............f.....f............
+    ............f.....f............
+    ............f.....f............
+    ............f.....f............
+    ............f.....f............
+    ............f.....f............
+    ............f.....f............
+    `, SpriteKind.Player)
+scene.setBackgroundColor(9)
+tiles.setTilemap(tilemap`level4`)
+tiles.placeOnTile(jamal, tiles.getTileLocation(1, 29))
+scene.cameraFollowSprite(jamal)
+info.setLife(1)
+info.setScore(0)
+controller.moveSprite(jamal, 100, 0)
+jamal.ay = 500
+forever(function () {
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.castle.tileGrass3)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.builtin.forestTiles0)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.dungeon.darkGroundCenter)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.dungeon.floorDarkDiamond)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.dungeon.stairLarge)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, assets.tile`tile10`)) {
+        jamal.vy = -500
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.dungeon.floorLight0)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, sprites.dungeon.floorLight4)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, assets.tile`tile2`)) {
+        jamal.vy = -300
+    }
+    if (jamal.tileKindAt(TileDirection.Bottom, assets.tile`tile29`)) {
+        jamal.vy = -300
+    }
+})
+forever(function () {
+    pause(1000)
+    info.changeScoreBy(-1)
+})
